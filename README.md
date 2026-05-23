@@ -1,48 +1,54 @@
 # Clinical Paper Agent Prompts
 
-> 一套用于临床研究论文全流程协作的AI Agent角色设定prompt。零依赖，任何LLM（ChatGPT/Claude/DeepSeek等）均可使用。
+> A complete set of 11 AI Agent role prompts for collaborative clinical research paper writing. Zero dependencies — works with any LLM (ChatGPT, Claude, DeepSeek, etc.).
 
-## 概述
+## Overview
 
-基于临床数据（Excel/CSV/SPSS）撰写原创临床研究论文的**11个Agent角色prompt**。每个Agent负责论文生产流程中的一个专业环节：
+**11 specialized Agent prompts** for writing original clinical research papers from raw data (Excel/CSV/SPSS). Each Agent handles one stage of the paper production pipeline:
 
-| Step | Agent | 角色 | 负责内容 |
-|------|-------|------|---------|
-| 1 | Agent1 | 数据管理专家 | 数据质控、清洗、预处理 |
-| 2 | Agent2 | 资深统计学家 | 统计分析计划(SAP)撰写 |
-| 3a | Agent3a | 金牌统计师 | 统计代码执行+图表生成 |
-| 3b | Agent3b | 文献检索专家 | 结构化文献检索 |
-| 4a | Agent4a | Introduction写手 | 引言撰写 |
-| 4b | Agent4b | Methods+Results写手 | 方法+结果撰写 |
-| 5 | Agent5 | Discussion写手 | 讨论撰写 |
-| 6a/b/c | Agent6a/b/c | 3位审稿人 | 临床/逻辑/统计三审 |
-| 7 | Agent7 | 综合修改专家 | 审稿回复+终审 |
+| Step | Agent | Role | Responsibility |
+|------|-------|------|---------------|
+| 1 | Agent1 | Data Manager | Data QC, cleaning, preprocessing |
+| 2 | Agent2 | Senior Statistician | Statistical Analysis Plan (SAP) |
+| 3a | Agent3a | Gold Statistician | Code execution + figures/tables |
+| 3b | Agent3b | Literature Searcher | Structured literature retrieval |
+| 4a | Agent4a | Introduction Writer | Introduction section |
+| 4b | Agent4b | Methods+Results Writer | Methods & Results sections |
+| 5 | Agent5 | Discussion Writer | Discussion section |
+| 6a/b/c | Agent6a/b/c | 3 Reviewers | Clinical/Logic/Statistics review |
+| 7 | Agent7 | Revision Editor | Response to reviewers + final check |
 
-## 使用方式
+## How to Use
 
-1. 选择对应环节的prompt文件
-2. 将完整prompt粘贴到你的LLM对话中
-3. 提供必要的上下文（研究背景、数据等）
-4. 建议由一人（Orchestrator）协调全流程
+1. Run the pipeline sequentially (Step 0 → 7)
+2. For each step, copy the corresponding Agent prompt into your LLM
+3. Provide necessary context (study background, data, interim results)
+4. One person should act as the **Orchestrator** (managing context flow between steps)
 
-## 文件说明
+A detailed pipeline flowchart is available in `pipeline_overview.md`.
 
-每个Agent有两个版本：
-- `*_lite.md` — 精简版（适用于已有科研知识的LLM）
-- `*_full.md` — 完整版（自包含，零依赖，推荐首次使用）
+## File Structure
 
-## 模型推荐
+Each Agent has two prompt versions:
+- `*_full.md` — Standalone version (self-contained, zero dependencies, recommended)
+- `*_lite.md` — Condensed version (assumes LLM has prior knowledge of scientific writing/stats)
 
-| Agent | 推荐模型 | 理由 |
-|-------|---------|------|
-| Agent2 SAP | Gemini Flash Lite | 推理稳定，成本低 |
-| Agent3a 统计执行 | Claude Haiku / GPT-4o | 代码生成质量高 |
-| Agent4a/b 写作 | GPT-4o / Claude Sonnet | 英文写作能力强 |
-| 其余Agent | DeepSeek V3 / GPT-4o mini | 够用，速度快 |
+## Recommended Models
 
-## 案例
+| Agent | Recommended Model | Rationale |
+|-------|-------------------|-----------|
+| Agent2 (SAP) | Gemini Flash Lite | Stable reasoning, low cost |
+| Agent3a (Stats code) | Claude Haiku / GPT-4o | Strong code generation |
+| Agent4a/b (Writing) | GPT-4o / Claude Sonnet | Strong English writing |
+| Other Agents | DeepSeek V3 / GPT-4o mini | Sufficient, fast |
 
-`examples/omg_gmg_case_study/` 目录包含一次完整的试跑案例（眼肌型重症肌无力→全身型转化预测模型）。
+## Case Study
+
+`examples/omg_gmg_case_study/` contains a complete trial run on an Ocular Myasthenia Gravis (OMG) → Generalized MG conversion prediction model, including:
+- Study profile
+- Statistical results
+- Literature pool
+- Final manuscript
 
 ## License
 
